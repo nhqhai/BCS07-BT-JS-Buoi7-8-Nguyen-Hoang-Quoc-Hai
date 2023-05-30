@@ -128,18 +128,21 @@ document.querySelector(".btn-light").onclick = thuTuTangDan;
 
 function soNguyenToDauTien(){
   function ktSoNguyenTo(n){
-    var soNguyenTo = n
-    for (var i = 2; i < n; i++) {
+    if (n < 2) {
+      return -1;
+    }
+    for (var i = 2; i <= Math.sqrt(n); i++) {
       if (n % i == 0) {
-        soNguyenTo = -1;
-        break;
+        return -1;
       }
     }
-    return soNguyenTo;
+    return n;
   }
-  for (var i = 1; i < arrSoNguyen.length; i++) {
-      if (ktSoNguyenTo(arrSoNguyen[i])) {
-        soNguyenTo = arrSoNguyen[i];
+    var soNguyenTo = -1
+    for (var i = 0; i < arrSoNguyen.length; i++) {
+      var soHienTai = ktSoNguyenTo(arrSoNguyen[i]);
+      if (soHienTai != -1) {
+        soNguyenTo = soHienTai;
         break;
       }
     }
@@ -149,19 +152,67 @@ document.querySelector(".btn-white").onclick = soNguyenToDauTien;
 
 // -------------------------------------------
 // Nút bấm 9: Nhập thêm 1 mảng số thực, tìm xem trong mảng có bao nhiêu số nguyên
-function nhapThemSoMoi(){
-var nhapSoMoi = document.getElementById("nhapThemSo").value *1;
-arrSoNguyen.push((nhapSoMoi));
-document.getElementById("nhapThemSo").innerHTML =arrSoNguyen;
+var arrSoMoi = [];
+
+function nhapThemSoMoi() {
+  var nhapSoMoi = document.getElementById("nhapThemSo").value;
+  arrSoMoi = nhapSoMoi.split(", ");
+  for (var i = 0; i < arrSoMoi.length; i++) {
+    var soMoi = parseInt(arrSoMoi[i]);
+    arrSoNguyen.push(soMoi);
+  }
+  document.getElementById("hienThiSoNhapThem").innerHTML = arrSoNguyen;
 }
+
 document.getElementById("nhapThemDaySoMoi").onclick = nhapThemSoMoi;
-function timSoNguyen(arrSoNguyen){
-  var cacSoNguyen = 0;
-  for (var i = 1; i < arrSoNguyen.length; i++) {
-    if (Number.isInteger(arrSoNguyen[i])) {
-      cacSoNguyen++;
+
+function timSoNguyenTo() {
+  var demSoNguyenTo = 0;
+  function kiemTraSoNguyenTo(x) {
+    if (x < 2) {
+      return -1;
+    }
+    for (var i = 2; i <= Math.sqrt(x); i++) {
+      if (x % i == 0) {
+        return -1;
+      }
+    }
+    return x;
+  }
+  for (var i = 0; i < arrSoMoi.length; i++) {
+    if (kiemTraSoNguyenTo(parseInt(arrSoMoi[i])) != -1) {
+      demSoNguyenTo++;
     }
   }
-  document.getElementById("hienThiCacSoNguyen").innerHTML = cacSoNguyen;
+  document.getElementById("hienThiCacSoNguyen").innerHTML = demSoNguyenTo;
 }
-document.querySelector(".btn-white").onclick = timSoNguyen;
+
+document.getElementById("soNguyenToNhapThem").onclick = timSoNguyenTo;
+
+// -------------------------------------------
+// Nút bấm 10: So sánh số lượng số dương và số lượng số âm xem số nào nhiều hơn
+
+function soSanhSo(){
+  var soLuongSoDuong = 0;
+  var soLuongSoAm = 0;
+  var ketQuaSoSanh = "";
+  for (var i = 0; i < arrSoNguyen.length; i++){
+    if (arrSoNguyen[i] > 0){
+      soLuongSoDuong++;
+    } else if (arrSoNguyen[i] < 0){
+      soLuongSoAm++;
+    }
+  }
+  ketQuaSoSanh += "Số lượng số dương là: " + soLuongSoDuong + "<br>";
+  ketQuaSoSanh += "Số lượng số âm là: " + soLuongSoAm + "<br>";
+  if (soLuongSoDuong > soLuongSoAm) {
+    ketQuaSoSanh += "Số dương nhiều hơn số âm.";
+  } else if (soLuongSoDuong < soLuongSoAm) {
+    ketQuaSoSanh += "Số âm nhiều hơn số dương.";
+  } else {
+    ketQuaSoSanh += "Số lượng số dương và số lượng số âm bằng nhau.";
+  }
+
+  document.getElementById("hienThiSoSanh").innerHTML = ketQuaSoSanh;
+}
+document.getElementById("soSanhSoAmDuong").onclick = soSanhSo;

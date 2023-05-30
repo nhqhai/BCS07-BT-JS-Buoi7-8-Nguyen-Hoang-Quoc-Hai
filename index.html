@@ -83,15 +83,16 @@
 
            <!-- Nút bấm 9 -->
             <!-- Thêm vài số -->
-            <button class="btn btn-white mt-3" id="nhapThemDaySoMoi" onclick="nhapThemSoMoi()">Nhập Thêm Số Mới</button>
+            <button class="btn btn-white mt-3"  onclick="nhapThemSoMoi()" id="nhapThemDaySoMoi">Nhập Thêm Số Mới (Cái này là nút bấm luôn nha mentor)</button>
             <input type="text" class="form-control" name="" id="nhapThemSo">
-            <button class="btn btn-white mt-3" onclick="timSoNguyen()">Nhập thêm 1 mảng số thực, tìm xem trong mảng có bao nhiêu số nguyên</button>
+            <div class="bg-white text-dark mt-3 p-4" id="hienThiSoNhapThem"></div>
+            <button class="btn btn-white mt-3" onclick="timSoNguyenTo()" id="soNguyenToNhapThem">Nhập thêm 1 mảng số thực, tìm xem trong mảng có bao nhiêu số nguyên</button>
            <div class="bg-white text-dark mt-3 p-4" id="hienThiCacSoNguyen"></div>
 
         <hr class="p-1">
 
            <!-- Nút bấm 10 -->
-           <button class="btn btn-warning mt-3" onclick="ketQuaTuyenSinh()">So sánh số lượng số dương và số lượng số âm xem số nào nhiều hơn</button>
+           <button class="btn btn-warning mt-3" onclick="soSanhSo()" id="soSanhSoAmDuong">So sánh số lượng số dương và số lượng số âm xem số nào nhiều hơn</button>
            <div class="bg-warning text-white mt-3 mb-3 p-4" id="hienThiSoSanh"></div>
 
     </div>
